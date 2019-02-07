@@ -2,8 +2,8 @@ const Agenda = require('agenda');
 const { MongoClient } = require('mongodb');
 
 async function run() {
-  const db = await MongoClient.connect('mongodb://localhost:27017/testdatabase');
-  const agenda = new Agenda().mongo(db, 'jobs');
+  const db = await MongoClient.connect('mongodb://localhost:27017/');
+  const agenda = new Agenda().mongo(db.db('pncrfx'), 'jobs');
 
   agenda.define('hello', () => {
     console.log('Hello, World!');
