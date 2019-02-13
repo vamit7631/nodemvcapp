@@ -26,7 +26,11 @@ module.exports.testfunction = async function (req, res) {
 }
 
 module.exports.findregisterData = function(req,res){
-    registerserviceObj.findregisterData(req, function(req,result){
-        
-    })
+        let condition = { firstname : req.query.firstname};
+        registerserviceObj.find(condition, function(err, result){
+            if(err)
+                res.send(err)
+            else
+                res.send(result);    
+        })
 }
