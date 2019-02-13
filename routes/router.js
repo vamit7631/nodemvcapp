@@ -6,7 +6,7 @@ const userregistration = require('../controller/registercontroller')
 
 router.post('/registration/register/', userregistration.testfunction);
 
-//router.get('/registration/getexcel',userregistration.excelschedular);
+router.get('/registration/getdetails/',userregistration.findregisterData);
 
 module.exports = router;
 
