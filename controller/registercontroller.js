@@ -1,4 +1,4 @@
-const registerserviceObj = require('../model/register');
+const registerserviceObj = require('../services/registerservice');
 const registervalidateObj = require('../validation/registervalidate')
 
 module.exports.testfunction = async function (req, res) {  
@@ -26,11 +26,11 @@ module.exports.testfunction = async function (req, res) {
 }
 
 module.exports.findregisterData = function(req,res){
-        let condition = { firstname : req.query.firstname};
-        registerserviceObj.find(condition, function(err, result){
-            if(err)
-                res.send(err)
-            else
-                res.send(result);    
-        })
+    registerserviceObj.findregisterData(req, function (err, result) {
+        if (err) {
+            return  res.status(400).json({ 'err': err });
+        } else {
+            return  res.status(200).json(result);
+        }
+    })
 }
