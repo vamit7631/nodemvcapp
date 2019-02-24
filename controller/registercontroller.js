@@ -11,12 +11,23 @@ module.exports.testfunction = async function (req, res) {
     }
 }
 
+module.exports.getAllDetails = function (req,res){
+    registerserviceObj.getAllDetails(req, function (err, result) {
+        if (err) {
+             res.status(400).json({ 'err': err });
+        } else {
+             res.status(200).json(result);
+        }
+    })    
+}
+
+
 module.exports.findregisterData = function (req, res) {
     registerserviceObj.findregisterData(req, function (err, result) {
         if (err) {
-            return res.status(400).json({ 'err': err });
+             res.status(400).json({ 'err': err });
         } else {
-            return res.status(200).json(result);
+             res.status(200).json(result);
         }
     })
 }

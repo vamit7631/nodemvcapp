@@ -5,14 +5,20 @@ const userregistration = require('../controller/registercontroller')
 
 /**
  * @swagger
- * definitions:
- *   TestSite:
+ * definition:
+ *   Register:
  *     properties:
- *      firstname:
- *          type: string
+ *       firstname:
+ *         type: string
+ *       lastname:
+ *         type: string
+ *       useremail:
+ *         type: string
+ *       dob:
+ *         type: string
+ *       gender:
+ *         type: string
  */
-
-
 
 
 /**
@@ -62,5 +68,24 @@ router.post('/registration/register/', userregistration.testfunction);
  */
 
 router.get('/registration/getdetails/',userregistration.findregisterData);
+
+/**
+ * @swagger
+ * /registration/getalldetails:
+ *   get:
+ *     tags:
+ *       - Register
+ *     description: GetDetails Registration
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: List of Registration Details
+ *         schema:
+ *           $ref: '#/definitions/getalldetails'
+ * 
+ */
+
+router.get('/registration/getalldetails/',userregistration.getAllDetails);
 
 module.exports = router;

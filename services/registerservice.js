@@ -5,6 +5,15 @@ module.exports.testfunction = async function (data){ 
     return await registermodelObj.create(data)
  }
  
+ module.exports.getAllDetails = function (req,cb){
+    registermodelObj.find({}, function (err, result) {
+        if (err) {
+             cb({ 'error': err }, null);
+        } else {
+             cb(null, result);
+        }
+    })    
+}
 
 module.exports.findregisterData = function(req,cb){
     let condition = { firstname : req.query.firstname};
