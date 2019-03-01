@@ -14,6 +14,8 @@ const userregistration = require('../controller/registercontroller')
  *         type: string
  *       useremail:
  *         type: string
+ *       password:
+ *         type: string
  *       dob:
  *         type: string
  *       gender:
