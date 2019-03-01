@@ -15,6 +15,9 @@ const registerDetails = new Schema({
     useremail : {
         type : String,
     },
+    password : {
+        type : String,
+    },
     dob : {
         type : Number,
     },
