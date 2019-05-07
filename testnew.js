@@ -79,19 +79,33 @@ module.exports.updateQuoteStatus = async (req) => {
 
 module.exports.uploadExcel = async (req) => {
 
-    let enumData = {
-        rfqNo: "rfqNo",
-        technicalBidDueDate: "technicalBidDueDate",
-        commercialBidDueDate: "commercialBidDueDate",
-        offerReferenceNo: "offerReferenceNo",
-        currency: "currency",
-        offerValidityPeriod: "offerValidityPeriod",
-        deliveryPeriod: "deliveryPeriod",
-        paymentterms: "paymentterms",
-        incoterm1: "incoterm1",
-        incoterm2: "incoterm2",
-        incoterm3: "incoterm3"
-    }
+    // let enumData = {
+    //     rfqNo: "rfqNo",
+    //     testr1: "fedf",
+    //     tesf: "dsf",
+    //     dfsd: "sdfdv",
+    //     itemcode: "itemcode",
+    //     itemDescription: "item Description",
+    //     vom: "vom",
+    //     rilSiteName: "ril Delivery Date",
+    //     commercialBidDueDate: "commercialBidDueDate",
+    //     offerReferenceNo: "offerReferenceNo",
+    //     currency: "currency",
+    //     offerValidityPeriod: "offerValidityPeriod",
+    //     deliveryPeriod: "deliveryPeriod",
+    //     paymentterms: "paymentterms",
+    //     incoterm1: "incoterm1",
+    //     incoterm2: "incoterm2",
+    //     incoterm3: "incoterm3"
+    // }
+
+
+
+    let arrayKeys = ['rfqNo', 'technicalBidDueDate', 'commercialBidDueDate', 'offerReferenceNo', 'currency', 'currenc2', 'currency3', 'currency4', 'currenc5', 'currency6', 'currency7', 'currency8', 'currency9', 'currency10', 'currency11', 'currency12', 'currency13', 'currency14', 'currency15', 'currency16', 'currency17', 'currency18', 'currency19', 'currency20', 'currency21', 'currency22', 'currency23', 'currency24', 'currency25', 'currency26', 'currency27', 'currency28', 'currency29', 'currency30', 'currency31', 'currency32', 'currency33', 'currency34', 'currency35']
+
+
+
+
 
 
 
@@ -107,14 +121,27 @@ module.exports.uploadExcel = async (req) => {
 
     let snodetail;
     let testarray = ['B1', 'D2', 'D4', 'D5', 'D6', 'D7', 'D8', 'G2', 'G4', 'G5', 'G6', 'G7', 'G8', 'J4', 'J5', 'J6', 'J7', 'J8'];
+    let finalArray = [];
     let objectArray = [];
+    let completeArray = [];
     let count = 0;
     let resultrow1
+    let arrayData;
+    let testobj;
+
+    for (let index = 0; index < testarray.length; index++) {
+        const testarrayres = testarray[index];
+        let arrayData = sh.getCell(testarrayres).value;
+        objectArray.push(arrayData)
+    }
+
+
     for (let i = 1; i <= sh.rowCount; i++) {
         let billToShipTo = sh.getRow(i).getCell(1).value;
         if (billToShipTo == 'Bill To Ship To level Information') {
 
             let rowresult = i + 5;
+
             for (rowresult; rowresult <= sh.rowCount; rowresult++) {
                 //   console.log(rowresult,'rowresult')
                 snodetail = sh.getRow(rowresult).getCell(2).value
@@ -122,48 +149,44 @@ module.exports.uploadExcel = async (req) => {
                 if (snodetail == null) {
                     break;
                 } else {
-                    console.log(rowresult, 'rowresult');
-                    let resultrow = sh.getRow(rowresult).values;
+                    let customeObj = {};
                     resultrow1 = sh.getRow(rowresult)._cells;
+                    let resultrow = sh.getRow(rowresult).values;
+
+                    testobj = objectArray.concat(resultrow);
+                    for (let k = 0; k < testobj.length; k++) {
+                        const ele = testobj[k];
+                        customeObj[arrayKeys[k]] = ele;
+                    }
+                    completeArray.push(customeObj);
 
                     for (let testdata of resultrow1) {
                         if (testdata === undefined) {
                             continue;
                         } else {
-                     //       console.log(testdata._address, 'address')
-                            testarray.push(testdata._address)
+                
+                            finalArray.push(testdata._address)
                         }
 
                     }
+
+
 
                 }
 
 
             }
-            testarray.push( ('B' + i), ('D' + i), ('G' + (i + 1)), ('G' + (i + 2)), ('I' + (i + 1)), ('I' + (i + 2)))
+            finalArray.push(('B' + i), ('D' + i), ('G' + (i + 1)), ('G' + (i + 2)), ('I' + (i + 1)), ('I' + (i + 2)))
             i += 3;
             count++;
         }
     }
+        console.log(completeArray)
+        console.log(finalArray)
 
 
-     //  console.log(testarray,'testarray')
+   
 
-
-     for(let testarrayres of testarray){
-         if(sh.getCell(testarrayres).value == null || sh.getCell(testarrayres).value == undefined){
-   //          console.log(testarrayres,'uuuuuuuuuuuuuuuuuuuuuuu')
-         }
-         else{
-             let arrayData = sh.getCell(testarrayres).value;      
-           //  arrayData[enumData]  
-           //  objectArray.push(arrayData)
-            console.log(arrayData)
-         }
-
-     }
-
-
-
+  
 
 }
