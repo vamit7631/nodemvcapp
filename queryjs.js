@@ -16,3 +16,39 @@
         }
     }
     ])
+
+
+
+
+
+
+
+
+
+db.getCollection("rfxheaderquotes").aggregate(
+    [
+        { 
+            "$match" : {
+                "vendorNo" : NumberLong(12),
+               "technicalBidDueDate" : { $gte : new ISODate("2012-01-12T20:15:31Z") }
+            }
+        }, 
+        { 
+            "$group" : {
+                "_id" : {
+                    "rfqStatus" : "$rfqStatus"
+                }, 
+                "COUNT(*)" : {
+                    "$sum" : NumberInt(1)
+                }
+            }
+        }, 
+        { 
+            "$project" : {
+                "rfqStatus" : "$_id.rfqStatus", 
+                "COUNT(*)" : "$COUNT(*)", 
+                "_id" : NumberInt(0)
+            }
+        }
+    ], 
+);
