@@ -29,26 +29,18 @@ db.getCollection("rfxheaderquotes").aggregate(
     [
         { 
             "$match" : {
-                "vendorNo" : NumberLong(12),
-               "commercialBidDueDate" : { $gte : new ISODate()-6 },
+                "vendorNo" : 108205,
+               "commercialBidDueDate" : { $lte : new ISODate()},
                "rfqStatus" : 'close'
             }
         }, 
         { 
             "$group" : {
-                "_id" : {
-                    "rfqStatus" : "$rfqStatus",
-                }, 
+                "_id" : "$rfqStatus",
+                 
                 "COUNT(*)" : {
                     "$sum" : NumberInt(1)
                 }
-            }
-        }, 
-        { 
-            "$project" : {
-                "rfqStatus" : "$_id.rfqStatus", 
-                "COUNT(*)" : "$COUNT(*)", 
-                "_id" : NumberInt(0)
             }
         }
     ]
