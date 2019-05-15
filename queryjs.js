@@ -30,13 +30,14 @@ db.getCollection("rfxheaderquotes").aggregate(
         { 
             "$match" : {
                 "vendorNo" : NumberLong(12),
-               "technicalBidDueDate" : { $gte : new ISODate("2012-01-12T20:15:31Z") }
+               "commercialBidDueDate" : { $gte : new ISODate()-6 },
+               "rfqStatus" : 'close'
             }
         }, 
         { 
             "$group" : {
                 "_id" : {
-                    "rfqStatus" : "$rfqStatus"
+                    "rfqStatus" : "$rfqStatus",
                 }, 
                 "COUNT(*)" : {
                     "$sum" : NumberInt(1)
@@ -50,5 +51,5 @@ db.getCollection("rfxheaderquotes").aggregate(
                 "_id" : NumberInt(0)
             }
         }
-    ], 
+    ]
 );
