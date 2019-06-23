@@ -190,3 +190,6 @@ module.exports.uploadExcel = async (req) => {
   
 
 }
+
+https://tecadmin.net/install-phpmyadmin-in-ubuntu/
+https://usefulangle.com/post/96/aws-ec2-install-linux-apache-mysql-php-phpmyadmin-lamp-stack-ubuntu-18-04
