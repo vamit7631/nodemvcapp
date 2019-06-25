@@ -1,0 +1,161 @@
+const fs = require('fs')
+const path = require('path')
+const NODE_ENV = process.env.NODE_ENV
+// const NODE_ENV = 'dev'
+let configBuffer = null
+
+// Init config_buffer according to the NODE_ENV
+switch (NODE_ENV) {
+case 'production':
+case 'prod':
+    configBuffer = fs.readFileSync(path.resolve(__dirname, 'production.json'), 'utf-8')
+    break
+case 'staging':
+case 'stage':
+case 'test':
+    configBuffer = fs.readFileSync(path.resolve(__dirname, 'staging.json'), 'utf-8')
+    break
+case 'dev':
+case 'development':
+    configBuffer = fs.readFileSync(path.resolve(__dirname, 'development.json'), 'utf-8')
+    break
+default:
+    configBuffer = fs.readFileSync(path.resolve(__dirname, 'default.json'), 'utf-8')
+}
+
+let config = JSON.parse(configBuffer)
+module.exports = config
+
+
+
+
+
+
+/************** default **************/
+
+
+
+
+{
+    "server": {
+        "port": 5000
+    },
+    "app": {
+        "prefix": "/pnc/rfx/api",
+        "secret": "longlivenodejsafterallitsjavascript3cheershiphiphurray"
+    },
+    "db": {
+        "mongodb_url": "mongodb://10.26.32.135:27017/pncrfx",
+        "mongodb_session_store_url": "mongodb://10.26.32.135:27017/pncsessions"
+    },
+    "auth": {
+        "token_validity": 3600,        
+        "cookie_validity": 3600        
+    },
+    "cookie": {
+        "path": "/pnc",
+        "name": "ril_xsprs_sid",
+        "validity": 3600
+    },
+    "token": {
+        "validity": 86400,
+        "refreshValidity": 604800,
+        "secret": "longlivenodejsafterallitsjavascript3cheershiphiphurray"
+    },
+    "cors": {
+        "whitelist" : ["http://localhost:3000"]
+    },
+    "external_endpoints":{       
+        "verify_token":"http://10.26.32.135:5400/pnc/security/api/v1/token/verify"
+    },
+    "login_url":{
+        "url" : "https://10.26.32.154/pnc/auth/login?redirectURL=https://azmobilityqas.ril.com/rauction/redirect"
+    },
+    "api_endpoint":{       
+        "APP_ID": "5c04e06e657f930011a93ad9",
+        "SMS_URL": "wrfe",
+        "EMAIL_URL": "sd"
+    }
+}
+
+
+
+
+
+/************** development **************/
+
+
+{
+    "server": {
+        "port": 5000
+    },
+    "app": {
+        "prefix": "/pnc/rfx/api",
+        "secret": "longlivenodejsafterallitsjavascript3cheershiphiphurray"
+    },
+    "db": {
+        "mongodb_url": "mongodb://10.26.32.135:27017/pncrfx",
+        "mongodb_session_store_url": "mongodb://10.26.32.135:27017/pncsessions"
+    },
+    "auth": {
+        "token_validity": 3600,        
+        "cookie_validity": 3600        
+    },
+    "cookie": {
+        "path": "/pnc",
+        "name": "ril_xsprs_sid",
+        "validity": 3600
+    },
+    "token": {
+        "validity": 86400,
+        "refreshValidity": 604800,
+        "secret": "longlivenodejsafterallitsjavascript3cheershiphiphurray"
+    },
+    "cors": {
+        "whitelist" : ["http://10.26.32.135:5999","http://10.26.32.135:5452","http://10.26.32.135:5451","http://localhost:3000","http://localhost:4200"]
+    },
+    "external_endpoints":{
+        "verify_token":"http://10.26.32.135:5400/pnc/security/api/v1/token/verify"
+    },
+    "login_url":{
+        "url" : "https://mobilitydev.ril.com/pnc/auth/login?redirectURL=https://mobilitydev.ril.com/rauction/redirect"
+    },
+    "api_endpoint":{    
+        "APP_ID": "5c04e06e657f930011a93ad9"
+    }
+}
+
+
+/***************production****************/
+
+{
+    "server": {
+        "port": 5000
+    },
+    "app": {
+        "prefix": "/pnc/rfx/api",
+        "secret": "longlivenodejsafterallitsjavascript3cheershiphiphurray"
+    },
+    "db": {
+        "mongodb_url": "mongodb://localhost:27017/pncrfx",
+        "mongodb_session_store_url": "mongodb://localhost:27017/pncsessions"
+    },
+    "auth": {
+        "token_validity": 3600,        
+        "cookie_validity": 3600        
+    },
+    "cookie": {
+        "path": "/pnc",
+        "name": "ril_xsprs_sid",
+        "validity": 3600
+    },
+    "token": {
+        "validity": 86400,
+        "refreshValidity": 604800,
+        "secret": "longlivenodejsafterallitsjavascript3cheershiphiphurray"
+    },
+    "api_endpoint":{       
+
+    }
+}
+
