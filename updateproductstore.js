@@ -1,3 +1,5 @@
+https://www.codementor.io/joanvasquez/a-simple-crud-using-mysql-and-node-js-p2xvvt6q8
+
 /************************connect.js ******************************/
 
 const mysql = require('promise-mysql');
